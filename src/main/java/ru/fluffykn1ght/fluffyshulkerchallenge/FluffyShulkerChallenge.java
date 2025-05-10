@@ -31,6 +31,7 @@ public final class FluffyShulkerChallenge extends JavaPlugin {
         if (!reload()) { return; }
 
         PluginLanguage.setLang(lang);
+        UserInterfaces.setPlugin(this);
 
         commandHandler = new CommandHandler();
         getCommand("shlkch").setExecutor(commandHandler);
