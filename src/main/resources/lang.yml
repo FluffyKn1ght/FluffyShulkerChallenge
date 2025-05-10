@@ -2,3 +2,7 @@ version: 1
 
 error-ingame-only: "<red>Эта команда доступна только в игре!</red>"
 
+gui-main-title: "<b>FluffyShulkerChallenge</b>"
+gui-main-shulkers-name: "<color:#AE7CFF><b>Шалкеры</b></color>"
+gui-main-shulkers-lore:
+  - "<gray>Управление шалкерами испытаний</gray>"

@@ -17,6 +17,7 @@ public class CommandHandler implements CommandExecutor, TabCompleter {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player) {
             Player player = (Player) sender;
+            UserInterfaces.openMainGui(player);
         }
         else {
             sender.sendMessage(PluginLanguage.get("error-ingame-only"));
