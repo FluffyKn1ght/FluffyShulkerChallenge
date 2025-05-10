@@ -1,6 +1,5 @@
 package ru.fluffykn1ght.fluffyshulkerchallenge;
 
-import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import ru.fluffykn1ght.pluginutils.GuiInventory;
@@ -83,9 +82,6 @@ public class UserInterfaces {
                         () -> {}
                 )
         );
-        for (String shulkerUuidString : plugin.data.getConfigurationSection("shulkers").getKeys(false)) {
-
-        }
 
         GuiInventory gui = new GuiInventory(PluginLanguage.get("gui-shulkers-title"), 5, items);
         gui.fillEmptySlots(0, Material.GRAY_STAINED_GLASS_PANE);

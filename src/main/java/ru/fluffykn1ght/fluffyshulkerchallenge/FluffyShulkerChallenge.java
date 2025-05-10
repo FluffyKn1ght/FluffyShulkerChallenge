@@ -12,6 +12,7 @@ import java.io.IOException;
 
 public final class FluffyShulkerChallenge extends JavaPlugin {
     public CommandHandler commandHandler;
+    public ChallengeShulkerHandler challengeShulkerHandler;
 
     public YamlConfiguration data = new YamlConfiguration();
     private final File dataFile = new File(getDataFolder(), "data.yml");
@@ -36,6 +37,9 @@ public final class FluffyShulkerChallenge extends JavaPlugin {
         commandHandler = new CommandHandler();
         getCommand("shlkch").setExecutor(commandHandler);
         getCommand("shlkch").setTabCompleter(commandHandler);
+
+        challengeShulkerHandler = new ChallengeShulkerHandler(this);
+        challengeShulkerHandler.reloadShulkers();
 
         getLogger().info("Плагин готов к работе!");
     }
