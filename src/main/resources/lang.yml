@@ -30,7 +30,7 @@ gui-shulkers-shulker-lore:
   - "<gray>%1$s</gray>"
   - " "
   - "<gold>Мобы:</gold> <white>%1$s</white>"
-  - "<gold>Лут:</gold> <white>%1$s предметов, <yellow>%2$s</yellow>%3$s<gray>-</gray>%4$s</yellow>%5$s</white>"
+  - "<gold>Лут:</gold> <white>%1$s предметов, <yellow>%2$s</yellow>%3$s<gray>-</gray>%2$s</yellow>%4$s</white>"
   - "<gold>Спавн:</gold> <white>%1$s</white>"
   - "<gold>Время:</gold> <white>%1$s сек.</white>"
   - "<gold>Активно:</gold> <white>%1$s штук</white>"

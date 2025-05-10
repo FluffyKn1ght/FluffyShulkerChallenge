@@ -18,7 +18,11 @@ public class UserInterfaces {
 
 
     public static void openMainGui(Player player) {
-        UserInterfaces.openGui(getMainGui(player), player);
+        openGui(getMainGui(player), player);
+    }
+
+    public static void openShulkerGui(Player player) {
+        openGui(getShulkersGui(player), player);
     }
 
 
@@ -37,6 +41,7 @@ public class UserInterfaces {
                 PluginLanguage.getLore("gui-main-shulkers-lore"),
                 () -> {}
             )
+                .leftClick(() -> openShulkerGui(player))
         );
         items.put(13, new GuiItem(
                         Material.SKELETON_SKULL,
@@ -82,6 +87,51 @@ public class UserInterfaces {
                         () -> {}
                 )
         );
+
+        int i = 0;
+        for (ChallengeShulker shulker : plugin.challengeShulkerHandler.shulkers) {
+            items.put(i, new GuiItem(
+                    shulker.blockType,
+                    1,
+                    PluginLanguage.getAndFormat(
+                            "gui-shulkers-shulker-name",
+                            new String[]{shulker.name}
+                    ),
+                    PluginLanguage.getAndFormatLore("gui-shulkers-shulker-lore",
+                            new String[][]{
+                                    new String[]{
+                                            shulker.uuid.toString()
+                                    },
+                                    null,
+                                    new String[]{
+                                            String.valueOf(shulker.mobs.size())
+                                    },
+                                    new String[]{
+                                            String.valueOf(shulker.items.size()),
+                                            "$", // TODO: Поддержка Vault
+                                            String.valueOf(shulker.minMoney),
+                                            String.valueOf(shulker.maxMoney)
+                                    },
+                                    new String[]{
+                                            "<TODO>"
+                                    },
+                                    new String[]{
+                                            String.valueOf(shulker.time)
+                                    },
+                                    new String[]{
+                                            "<TODO>"
+                                    },
+                                    null,
+                                    null,
+                                    null,
+                                    null
+                            }
+                    ),
+                    () -> {})
+            );
+
+            i++;
+        }
 
         GuiInventory gui = new GuiInventory(PluginLanguage.get("gui-shulkers-title"), 5, items);
         gui.fillEmptySlots(0, Material.GRAY_STAINED_GLASS_PANE);
