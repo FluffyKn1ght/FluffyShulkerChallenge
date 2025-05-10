@@ -1,6 +1,16 @@
+# FluffyShulkerChallenge - Файл языка
+# Синтакс MiniMessage. Документация: https://docs.advntr.dev/minimessage/format.html
+# Подстановки имеют формат %x$s, где x - номер подстановки (см. ориг. файл и игру)
+# Для описания предметов (lore), на каждой новой линии счёт подстановок идёт сначала, с 1
+
+# ЭТО ЗНАЧЕНИЕ НИ В КОЕМ СЛУЧАЕ НЕ ТРОГАТЬ!
 version: 1
 
 error-ingame-only: "<red>Эта команда доступна только в игре!</red>"
+
+gui-back: "<gold><b>Назад</b></gold>"
+gui-nextpage: "<gold><b>След. страница</b></gold>"
+gui-prevpage: "<gold><b>Пред. страница</b></gold>"
 
 gui-main-title: "<b>FluffyShulkerChallenge</b>"
 gui-main-shulkers-name: "<color:#AE7CFF><b>Шалкеры</b></color>"
@@ -12,4 +22,22 @@ gui-main-mobs-lore:
 gui-main-active-name: "<color:#FFEC8E><b>Активные шалкеры</b></color>"
 gui-main-active-lore:
   - "<gray>Просмотр и контроль шалкеров, уже</gray>"
-  - "<gray>поставленных в мире.</gray>"
+  - "<gray>поставленных в мире</gray>"
+
+gui-shulkers-title: "<b>Шалкеры</b>"
+gui-shulkers-shulker-name: "<color:#AE7CFF><b>%1$s</b></color>"
+gui-shulkers-shulker-lore:
+  - "<gray>%1$s</gray>"
+  - " "
+  - "<gold>Мобы:</gold> <white>%1$s</white>"
+  - "<gold>Лут:</gold> <white>%1$s предметов, <yellow>%2$s</yellow>%3$s<gray>-</gray>%4$s</yellow>%5$s</white>"
+  - "<gold>Спавн:</gold> <white>%1$s</white>"
+  - "<gold>Время:</gold> <white>%1$s сек.</white>"
+  - "<gold>Активно:</gold> <white>%1$s штук</white>"
+  - " "
+  - "<gold>ЛКМ</gold> <white>Получить как блок</white>"
+  - "<gold>ПКМ</gold> <white>Редактировать</white>"
+  - "<gold>ДРОП</gold> <white>Удалить</white>"
+gui-shulkers-new-name: "<b><yellow>+</yellow> <color:#AE7CFF>Создать шалкер</color>"
+gui-shulkers-new-lore:
+  - "<gray>Создать новый шалкер испытания</gray>"

@@ -1,5 +1,6 @@
 package ru.fluffykn1ght.fluffyshulkerchallenge;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import ru.fluffykn1ght.pluginutils.GuiInventory;
@@ -63,5 +64,36 @@ public class UserInterfaces {
         return gui;
     }
 
+
+    private static GuiInventory getShulkersGui(Player player) {
+        Map<Integer, GuiItem> items = new HashMap<>();
+        items.put(36, new GuiItem(
+                        Material.SPECTRAL_ARROW,
+                        1,
+                        PluginLanguage.get("gui-back"),
+                        null,
+                        () -> openMainGui(player)
+                )
+        );
+        items.put(40, new GuiItem(
+                        Material.ANVIL,
+                        1,
+                        PluginLanguage.get("gui-shulkers-new-name"),
+                        PluginLanguage.getLore("gui-shulkers-new-lore"),
+                        () -> {}
+                )
+        );
+        for (String shulkerUuidString : plugin.data.getConfigurationSection("shulkers").getKeys(false)) {
+
+        }
+
+        GuiInventory gui = new GuiInventory(PluginLanguage.get("gui-shulkers-title"), 5, items);
+        gui.fillEmptySlots(0, Material.GRAY_STAINED_GLASS_PANE);
+        gui.fillEmptySlots(1, Material.GRAY_STAINED_GLASS_PANE);
+        gui.fillEmptySlots(2, Material.GRAY_STAINED_GLASS_PANE);
+        gui.fillEmptySlots(3, Material.GRAY_STAINED_GLASS_PANE);
+        gui.fillEmptySlots(4, Material.PURPLE_STAINED_GLASS_PANE);
+        return gui;
+    }
 
 }
