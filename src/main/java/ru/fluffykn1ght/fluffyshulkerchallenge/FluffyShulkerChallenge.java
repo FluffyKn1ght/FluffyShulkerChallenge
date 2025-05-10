@@ -13,10 +13,10 @@ import java.io.IOException;
 public final class FluffyShulkerChallenge extends JavaPlugin {
     public CommandHandler commandHandler;
 
-    public YamlConfiguration data;
+    public YamlConfiguration data = new YamlConfiguration();
     private final File dataFile = new File(getDataFolder(), "data.yml");
 
-    public YamlConfiguration lang;
+    public YamlConfiguration lang = new YamlConfiguration();
     private final File langFile = new File(getDataFolder(), "lang.yml");
 
     private final int LANG_VERSION = 1;
