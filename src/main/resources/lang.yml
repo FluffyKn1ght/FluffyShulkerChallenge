@@ -6,3 +6,10 @@ gui-main-title: "<b>FluffyShulkerChallenge</b>"
 gui-main-shulkers-name: "<color:#AE7CFF><b>Шалкеры</b></color>"
 gui-main-shulkers-lore:
   - "<gray>Управление шалкерами испытаний</gray>"
+gui-main-mobs-name: "<color:#97FF89><b>Мобы</b></color>"
+gui-main-mobs-lore:
+  - "<gray>Настройка мобов для спавна в испытаниях</gray>"
+gui-main-active-name: "<color:#FFEC8E><b>Активные шалкеры</b></color>"
+gui-main-active-lore:
+  - "<gray>Просмотр и контроль шалкеров, уже</gray>"
+  - "<gray>поставленных в мире.</gray>"

@@ -38,6 +38,22 @@ public class UserInterfaces {
                 () -> {}
             )
         );
+        items.put(13, new GuiItem(
+                        Material.SKELETON_SKULL,
+                        1,
+                        PluginLanguage.get("gui-main-mobs-name"),
+                        PluginLanguage.getLore("gui-main-mobs-lore"),
+                        () -> {}
+                )
+        );
+        items.put(16, new GuiItem(
+                        Material.BEACON,
+                        1,
+                        PluginLanguage.get("gui-main-active-name"),
+                        PluginLanguage.getLore("gui-main-active-lore"),
+                        () -> {}
+                )
+        );
 
         GuiInventory gui = new GuiInventory(PluginLanguage.get("gui-main-title"), 4, items);
         gui.fillEmptySlots(0, Material.GRAY_STAINED_GLASS_PANE);
@@ -46,4 +62,6 @@ public class UserInterfaces {
         gui.fillEmptySlots(3, Material.BLACK_STAINED_GLASS_PANE);
         return gui;
     }
+
+
 }
