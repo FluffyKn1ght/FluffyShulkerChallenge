@@ -32,7 +32,7 @@ public class ChallengeShulker {
             shulker.items.add(ShulkerDropItem.fromConfig(config.getConfigurationSection("items." + uuidString)));
         }
         shulker.minMoney = config.getInt("money.min");
-        shulker.minMoney = config.getInt("money.max");
+        shulker.maxMoney = config.getInt("money.max");
 
         return shulker;
     }
