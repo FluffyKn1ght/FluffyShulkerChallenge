@@ -1,0 +1,4 @@
+name: FluffyShulkerChallenge
+version: '${project.version}'
+main: ru.fluffykn1ght.fluffyshulkerchallenge.FluffyShulkerChallenge
+api-version: '1.20'
