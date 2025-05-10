@@ -4,6 +4,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+import ru.fluffykn1ght.pluginutils.ConfigurationUpgrader;
 import ru.fluffykn1ght.pluginutils.PluginLanguage;
 
 import java.io.File;
@@ -18,6 +19,9 @@ public final class FluffyShulkerChallenge extends JavaPlugin {
     public YamlConfiguration lang;
     private final File langFile = new File(getDataFolder(), "lang.yml");
 
+    private final int LANG_VERSION = 1;
+    private final int DATA_VERSION = 1;
+    //private final int CONFIG_VERSION = 1;
 
     @Override
     public void onEnable() {
@@ -88,7 +92,16 @@ public final class FluffyShulkerChallenge extends JavaPlugin {
             }
         }
 
-        getLogger().info("Данные (пере)загружены");
+        if (data.getInt("version") < DATA_VERSION) {
+            getLogger().info("Апгрейд файла данных (data.yml) с версии " + data.getInt("version") + " до " + DATA_VERSION);
+            data = ConfigurationUpgrader.upgrade(data, YamlConfiguration.loadConfiguration(getTextResource("data.yml")));
+        }
+        if (lang.getInt("version") < LANG_VERSION) {
+            getLogger().info("Апгрейд файла языка (lang.yml) с версии " + lang.getInt("version") + " до " + LANG_VERSION);
+            lang = ConfigurationUpgrader.upgrade(lang, YamlConfiguration.loadConfiguration(getTextResource("lang.yml")));
+        }
+
+        getLogger().info("Данные (пере)загружены!");
         return true;
     }
 }
