@@ -15,6 +15,7 @@ public class ChallengeShulkerHandler {
     public void reloadShulkers() {
         plugin.getLogger().info("Загрузка шалкеров из файла данных...");
         shulkers.clear();
+        if (plugin.data.getConfigurationSection("shulkers") == null) { return; }
         for (String shulkerUuidString : plugin.data.getConfigurationSection("shulkers").getKeys(false)) {
             shulkers.add(ChallengeShulker.fromConfig(plugin.data.getConfigurationSection("shulkers." + shulkerUuidString)));
         }
