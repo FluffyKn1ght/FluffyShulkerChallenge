@@ -2,9 +2,11 @@ package ru.fluffykn1ght.fluffyshulkerchallenge;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
 import ru.fluffykn1ght.pluginutils.StringDeserializer;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -36,5 +38,21 @@ public class ChallengeShulker {
         shulker.time = config.getInt("time");
 
         return shulker;
+    }
+
+    public void saveToConfig(Configuration config) {
+        String path = "shulkers." + uuid;
+        config.set(path + ".name", name);
+        config.set(path + ".blockType", blockType.toString());
+        List<UUID> mobUuids = new ArrayList<>();
+        for (ShulkerMob mob : mobs) {
+            mobUuids.add(mob.uuid);
+        }
+        config.set(path + ".mobs", mobUuids);
+        for (ShulkerDropItem item : items) {
+            config.set(path + ".items." + item.uuid + ".stack", item.stack);
+            config.set(path + ".items." + item.uuid + ".min", item.minAmount);
+            config.set(path + ".items." + item.uuid + ".max", item.maxAmount);
+        }
     }
 }

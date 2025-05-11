@@ -5,10 +5,12 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class ShulkerDropItem {
     public ItemStack stack;
+    public UUID uuid = UUID.randomUUID();
     public int minAmount;
     public int maxAmount;
 
@@ -17,6 +19,7 @@ public class ShulkerDropItem {
         drop.stack = config.getItemStack("stack");
         drop.minAmount = config.getInt("min");
         drop.maxAmount = config.getInt("max");
+        drop.uuid = UUID.fromString(config.getName());
         return drop;
     }
 
