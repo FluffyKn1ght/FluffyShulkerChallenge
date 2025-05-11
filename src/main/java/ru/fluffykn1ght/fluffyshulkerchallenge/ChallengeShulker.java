@@ -17,6 +17,7 @@ public class ChallengeShulker {
     public int minMoney = 0;
     public int maxMoney = 0;
     public int time = 300;
+    public boolean survive = false;
 
     public static ChallengeShulker fromConfig(ConfigurationSection config) {
         ChallengeShulker shulker = new ChallengeShulker();
@@ -32,7 +33,8 @@ public class ChallengeShulker {
         }
         shulker.minMoney = config.getInt("money.min");
         shulker.maxMoney = config.getInt("money.max");
-        shulker.time = config.getInt("time");
+        shulker.time = config.getInt("challenge.time");
+        shulker.survive = config.getBoolean("challenge.survive");
 
         return shulker;
     }
@@ -51,5 +53,9 @@ public class ChallengeShulker {
             config.set(path + ".items." + item.uuid + ".min", item.minAmount);
             config.set(path + ".items." + item.uuid + ".max", item.maxAmount);
         }
+        config.set(path + ".money.min", minMoney);
+        config.set(path + ".money.max", maxMoney);
+        config.set(path + ".challenge.time", time);
+        config.set(path + ".challenge.survive", survive);
     }
 }

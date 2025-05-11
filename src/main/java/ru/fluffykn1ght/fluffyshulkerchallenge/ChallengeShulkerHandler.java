@@ -25,11 +25,10 @@ public class ChallengeShulkerHandler {
         plugin.getLogger().info("Загружено " + shulkers.size() + " шалкеров");
     }
 
-    public void createShulker(Player player, String name, Consumer<Player> created) {
+    public void createShulker(Player player, String name) {
         ChallengeShulker shulker = new ChallengeShulker();
         shulker.name = name;
         shulker.spawn = new ShulkerSpawn();
         shulkers.add(shulker);
-        created.accept(player);
     }
 }
