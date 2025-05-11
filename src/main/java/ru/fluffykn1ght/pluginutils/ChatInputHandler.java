@@ -6,10 +6,7 @@ import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
+import org.bukkit.event.*;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -87,6 +84,6 @@ public class ChatInputHandler implements Listener {
     }
 
     private void destroy() {
-        AsyncChatEvent.getHandlerList().unregisterAll(this);
+        HandlerList.unregisterAll(this);
     }
 }

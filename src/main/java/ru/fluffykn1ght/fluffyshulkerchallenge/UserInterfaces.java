@@ -23,7 +23,7 @@ public class UserInterfaces {
     }
 
     public static void openShulkerEditorGui(Player player, ChallengeShulker shulker) {
-        openGui(ShulkerEditorGui.get(player, shulker), player);
+        openGui(ShulkerEditorGui.get(player, shulker, plugin), player);
     }
 
 

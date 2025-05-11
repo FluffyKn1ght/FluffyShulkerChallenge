@@ -12,6 +12,8 @@ chatinput-main: "\n<gold>Пожалуйста, введите нужный те�
 chatinput-cancel: "<gray>Нажмите ЛКМ для отмены ввода текста.</gray>\n"
 chatinput-title: "<gold>Введите текст в чат</gold>"
 
+iteminput-title: "<b>Выберите предмет</b>"
+
 gui-back: "<gold><b>Назад</b></gold>"
 gui-nextpage: "<gold><b>След. страница</b></gold>"
 gui-prevpage: "<gold><b>Пред. страница</b></gold>"
@@ -50,12 +52,12 @@ gui-shulkereditor-shulker-lore:
   - "<gray>%1$s</gray>"
   - " "
   - "<gold>Мобы:</gold> <white>%1$s</white>"
-  - "<gold>Лут:</gold> <white>%1$s предметов, <yellow>%2$s</yellow>%3$s<gray>-</gray>%2$s</yellow>%4$s</white>"
+  - "<gold>Лут:</gold> <white>%1$s предметов, <yellow>%2$s</yellow>%3$s<gray>-</gray><yellow>%2$s</yellow>%4$s</white>"
   - "<gold>Спавн:</gold> <white>%1$s</white>"
   - "<gold>Время:</gold> <white>%1$s сек.</white>"
   - "<gold>Активно:</gold> <white>%1$s штук</white>"
   - " "
-  - "<gold>ЛКМ</gold> <white>Переименовать</white>"
+  - "<gold><b>ЛКМ</b></gold> <white>Переименовать</white>"
 
 gui-shulkereditor-main-title: "<b>Изменить - %1$s</b>"
 gui-shulkereditor-main-blocktype-name: "<color:#AE7CFF><b>Тип блока</b></color>"

@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -98,7 +99,7 @@ public class GuiInventory implements Listener {
     public void onPlayerLeave(PlayerQuitEvent event) {
         if (event.getPlayer() == player) {
             close.run();
-            event.getHandlers().unregisterAll(this);
+            HandlerList.unregisterAll(this);
         }
     }
 }
