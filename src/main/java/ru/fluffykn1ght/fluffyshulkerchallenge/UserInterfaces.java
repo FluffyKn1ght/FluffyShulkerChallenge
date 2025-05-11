@@ -1,7 +1,11 @@
 package ru.fluffykn1ght.fluffyshulkerchallenge;
 
+import io.papermc.paper.event.player.AsyncChatEvent;
+import net.kyori.adventure.text.TextComponent;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
+import ru.fluffykn1ght.pluginutils.ChatInputHandler;
 import ru.fluffykn1ght.pluginutils.GuiInventory;
 import ru.fluffykn1ght.pluginutils.GuiItem;
 import ru.fluffykn1ght.pluginutils.PluginLanguage;
@@ -60,7 +64,7 @@ public class UserInterfaces {
                 )
         );
 
-        GuiInventory gui = new GuiInventory(PluginLanguage.get("gui-main-title"), 4, items);
+        GuiInventory gui = new GuiInventory(PluginLanguage.get("gui-main-title"), 4, items, player);
         gui.fillEmptySlots(0, Material.GRAY_STAINED_GLASS_PANE);
         gui.fillEmptySlots(1, Material.GRAY_STAINED_GLASS_PANE);
         gui.fillEmptySlots(2, Material.GRAY_STAINED_GLASS_PANE);
@@ -86,6 +90,17 @@ public class UserInterfaces {
                         PluginLanguage.getLore("gui-shulkers-new-lore"),
                         () -> {}
                 )
+                .leftClick(() -> ChatInputHandler.askForChatInput(
+                        (AsyncChatEvent event) -> { plugin.challengeShulkerHandler.createShulker(
+                                player,
+                                ChatInputHandler.getContent(event.originalMessage()),
+                                (Player p) -> {} // TODO
+                        ); }, // TODO
+                        () -> {},
+                        player,
+                        true,
+                        "Введите имя для нового шалкера:"
+                ))
         );
 
         int i = 0;
@@ -133,7 +148,7 @@ public class UserInterfaces {
             i++;
         }
 
-        GuiInventory gui = new GuiInventory(PluginLanguage.get("gui-shulkers-title"), 5, items);
+        GuiInventory gui = new GuiInventory(PluginLanguage.get("gui-shulkers-title"), 5, items, player);
         gui.fillEmptySlots(0, Material.GRAY_STAINED_GLASS_PANE);
         gui.fillEmptySlots(1, Material.GRAY_STAINED_GLASS_PANE);
         gui.fillEmptySlots(2, Material.GRAY_STAINED_GLASS_PANE);
