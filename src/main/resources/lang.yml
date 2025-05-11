@@ -36,6 +36,7 @@ gui-shulkers-shulker-lore:
   - "<gray>%1$s</gray>"
   - " "
   - "<gold>Мобы:</gold> <white>%1$s</white>"
+  - "<gold>Мобы:</gold> <white>%1$s</white>"
   - "<gold>Лут:</gold> <white>%1$s предметов, <yellow>%2$s</yellow>%3$s<gray>-</gray><yellow>%2$s</yellow>%4$s</white>"
   - "<gold>Спавн:</gold> <white>%1$s</white>"
   - "<gold>Время:</gold> <white>%1$s сек.</white>"
@@ -63,9 +64,11 @@ gui-shulkereditor-main-title: "<b>Изменить - %1$s</b>"
 gui-shulkereditor-main-blocktype-name: "<color:#AE7CFF><b>Тип блока</b></color>"
 gui-shulkereditor-main-blocktype-lore: 
   - "<gray>Изменить тип блока шалкера</gray>"
-gui-shulkereditor-main-spawn-name: "<color:#AE7CFF><b>Спавн</b></color>"
+#gui-shulkereditor-main-spawn-name: "<color:#AE7CFF><b>Спавн</b></color>"
+gui-shulkereditor-main-spawn-name: "<red><b>Спавн</b></red>"
 gui-shulkereditor-main-spawn-lore:
   - "<gray>Настройка спавна шалкера в мире</gray>"
+  - "<red>Функция находится в разработке!</red>"
 gui-shulkereditor-main-mobs-name: "<color:#AE7CFF><b>Мобы</b></color>"
 gui-shulkereditor-main-mobs-lore:
   - "<gray>Настройка мобов шалкера испытаний</gray>"

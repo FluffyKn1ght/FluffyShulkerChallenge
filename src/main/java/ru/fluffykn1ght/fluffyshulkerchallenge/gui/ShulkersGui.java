@@ -41,7 +41,7 @@ public class ShulkersGui {
                                     );
                                     UserInterfaces.openShulkerEditorGui(player, shulker);
                                 },
-                                () -> UserInterfaces.openShulkerGui(player), // TODO
+                                () -> UserInterfaces.openShulkerGui(player),
                                 player,
                                 true,
                                 "Введите имя для нового шалкера:",
@@ -69,12 +69,12 @@ public class ShulkersGui {
                                     },
                                     new String[]{
                                             String.valueOf(shulker.items.size()),
-                                            "$", // TODO: Поддержка Vault
+                                            "$",
                                             String.valueOf(shulker.minMoney),
                                             String.valueOf(shulker.maxMoney)
                                     },
                                     new String[]{
-                                            "<TODO>"
+                                            "<В разработке!>"
                                     },
                                     new String[]{
                                             String.valueOf(shulker.time)

@@ -70,12 +70,12 @@ class MainPage {
                                 },
                                 new String[]{
                                         String.valueOf(shulker.items.size()),
-                                        "$", // TODO: Поддержка Vault
+                                        "$",
                                         String.valueOf(shulker.minMoney),
                                         String.valueOf(shulker.maxMoney)
                                 },
                                 new String[]{
-                                        "<TODO>"
+                                        "<В разработке!>"
                                 },
                                 new String[]{
                                         String.valueOf(shulker.time)
