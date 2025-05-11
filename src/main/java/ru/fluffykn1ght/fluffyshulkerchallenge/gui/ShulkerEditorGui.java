@@ -113,7 +113,8 @@ class MainPage {
                 ))
         );
         items.put(13, new GuiItem(
-                Material.FOX_SPAWN_EGG,
+                //Material.FOX_SPAWN_EGG,
+                Material.RED_STAINED_GLASS_PANE,
                 1,
                 PluginLanguage.get("gui-shulkereditor-main-spawn-name"),
                 PluginLanguage.getLore("gui-shulkereditor-main-spawn-lore"),
@@ -127,7 +128,7 @@ class MainPage {
                 () -> {}
         ));
         items.put(15, new GuiItem(
-                Material.BUNDLE,
+                Material.CHEST,
                 1,
                 PluginLanguage.get("gui-shulkereditor-main-items-name"),
                 PluginLanguage.getLore("gui-shulkereditor-main-items-lore"),
