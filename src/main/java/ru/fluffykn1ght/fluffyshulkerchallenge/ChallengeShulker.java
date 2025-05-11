@@ -15,7 +15,7 @@ public class ChallengeShulker {
     public String name;
     public UUID uuid;
     public Material blockType;
-    // TODO: Спавн шалкера (ShulkerSpawn)
+    public ShulkerSpawn spawn;
     public List<ShulkerMob> mobs;
     public Set<ShulkerDropItem> items;
     public int minMoney;
@@ -27,6 +27,7 @@ public class ChallengeShulker {
         shulker.uuid = UUID.fromString(config.getName());
         shulker.name = config.getString("name");
         shulker.blockType = Material.valueOf(config.getString("blockType"));
+        shulker.spawn = ShulkerSpawn.fromString(config.getString("spawn"));
         for (String uuidString : config.getConfigurationSection("mobs").getKeys(false)) {
             shulker.mobs.add(ShulkerMob.fromConfig(config.getRoot().getConfigurationSection("mobs." + uuidString)));
         }
