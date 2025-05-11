@@ -12,7 +12,7 @@ import java.util.UUID;
 public class ShulkerMob {
     public EntityType type;
     public String name;
-    public UUID uuid;
+    public UUID uuid = UUID.randomUUID();
     public ItemStack head;
     public ItemStack chest;
     public ItemStack pants;

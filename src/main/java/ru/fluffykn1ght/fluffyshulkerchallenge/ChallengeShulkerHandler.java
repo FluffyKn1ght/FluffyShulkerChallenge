@@ -1,7 +1,10 @@
 package ru.fluffykn1ght.fluffyshulkerchallenge;
 
+import org.bukkit.entity.Player;
+
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Consumer;
 
 public class ChallengeShulkerHandler {
     private final FluffyShulkerChallenge plugin;
@@ -20,5 +23,13 @@ public class ChallengeShulkerHandler {
             shulkers.add(ChallengeShulker.fromConfig(plugin.data.getConfigurationSection("shulkers." + shulkerUuidString)));
         }
         plugin.getLogger().info("Загружено " + shulkers.size() + " шалкеров");
+    }
+
+    public void createShulker(Player player, String name, Consumer<Player> created) {
+        ChallengeShulker shulker = new ChallengeShulker();
+        shulker.name = name;
+        shulker.spawn = new ShulkerSpawn();
+        shulkers.add(shulker);
+        created.accept(player);
     }
 }

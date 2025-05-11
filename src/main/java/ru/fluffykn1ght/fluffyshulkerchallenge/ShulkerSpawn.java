@@ -11,8 +11,8 @@ public class ShulkerSpawn {
     public boolean autospawn = false;
     public List<UUID> worldUuids = new ArrayList<>();
     public List<World> worlds = new ArrayList<>();
-    public double xrange = 0;
-    public double zrange = 0;
+    public double xrange = 1000;
+    public double zrange = 1000;
     public int period = 600;
 
     public static ShulkerSpawn fromString(String string) {

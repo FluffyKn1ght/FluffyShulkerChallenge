@@ -4,23 +4,19 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
-import ru.fluffykn1ght.pluginutils.StringDeserializer;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 public class ChallengeShulker {
-    public String name;
-    public UUID uuid;
-    public Material blockType;
+    public String name = "Шалкер";
+    public UUID uuid = UUID.randomUUID();
+    public Material blockType = Material.SHULKER_BOX;
     public ShulkerSpawn spawn;
-    public List<ShulkerMob> mobs;
-    public Set<ShulkerDropItem> items;
-    public int minMoney;
-    public int maxMoney;
-    public int time;
+    public List<ShulkerMob> mobs = new ArrayList<>();
+    public Set<ShulkerDropItem> items = new HashSet<>();
+    public int minMoney = 0;
+    public int maxMoney = 0;
+    public int time = 300;
 
     public static ChallengeShulker fromConfig(ConfigurationSection config) {
         ChallengeShulker shulker = new ChallengeShulker();
