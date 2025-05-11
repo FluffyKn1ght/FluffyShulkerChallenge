@@ -4,6 +4,7 @@ import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.title.Title;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
@@ -12,6 +13,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.time.Duration;
 import java.util.function.Consumer;
@@ -21,16 +23,18 @@ public class ChatInputHandler implements Listener {
     public final Runnable cancel;
     public final Player player;
     public final boolean cancellable;
+    private final JavaPlugin plugin;
 
-    public ChatInputHandler(Consumer<AsyncChatEvent> callback, Runnable cancel, Player player, boolean cancellable) {
+    public ChatInputHandler(Consumer<AsyncChatEvent> callback, Runnable cancel, Player player, boolean cancellable, JavaPlugin plugin) {
         this.callback = callback;
         this.cancel = cancel;
         this.player = player;
         this.cancellable = cancellable;
+        this.plugin = plugin;
     }
 
-    public static void askForChatInput(Consumer<AsyncChatEvent> callback, Runnable cancel, Player player, boolean cancellable, String details) {
-        ChatInputHandler chatInputHandler = new ChatInputHandler(callback, cancel, player, cancellable);
+    public static void askForChatInput(Consumer<AsyncChatEvent> callback, Runnable cancel, Player player, boolean cancellable, String details, JavaPlugin plugin) {
+        ChatInputHandler chatInputHandler = new ChatInputHandler(callback, cancel, player, cancellable, plugin);
         player.closeInventory();
         player.sendMessage(PluginLanguage.getAndFormat("chatinput-main", new String[]{ details }));
         if (cancellable) {
@@ -47,6 +51,7 @@ public class ChatInputHandler implements Listener {
                         )
                 )
         );
+        plugin.getServer().getPluginManager().registerEvents(chatInputHandler, plugin);
     }
 
     public static String getContent(Component component) {
@@ -57,7 +62,7 @@ public class ChatInputHandler implements Listener {
     @EventHandler
     public void onChatEvent(AsyncChatEvent event) {
         if (event.getPlayer() == player) {
-            callback.accept(event);
+            plugin.getServer().getScheduler().runTask(plugin, () -> callback.accept(event));
             event.setCancelled(true);
             player.resetTitle();
             destroy();
@@ -76,7 +81,7 @@ public class ChatInputHandler implements Listener {
         if (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK) {
             event.setCancelled(true);
             player.resetTitle();
-            cancel.run();
+            plugin.getServer().getScheduler().runTask(plugin, cancel);
             destroy();
         }
     }

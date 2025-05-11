@@ -4,6 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -28,8 +29,11 @@ public class ChallengeShulker {
         for (String uuidString : config.getConfigurationSection("mobs").getKeys(false)) {
             shulker.mobs.add(ShulkerMob.fromConfig(config.getRoot().getConfigurationSection("mobs." + uuidString)));
         }
-        for (String uuidString : config.getConfigurationSection("items").getKeys(false)) {
-            shulker.items.add(ShulkerDropItem.fromConfig(config.getConfigurationSection("items." + uuidString)));
+        Set<String> itemKeys = config.getConfigurationSection("items").getKeys(false);
+        if (itemKeys != null) {
+            for (String uuidString : itemKeys) {
+                shulker.items.add(ShulkerDropItem.fromConfig(config.getConfigurationSection("items." + uuidString)));
+            }
         }
         shulker.minMoney = config.getInt("money.min");
         shulker.maxMoney = config.getInt("money.max");
@@ -57,5 +61,6 @@ public class ChallengeShulker {
         config.set(path + ".money.max", maxMoney);
         config.set(path + ".challenge.time", time);
         config.set(path + ".challenge.survive", survive);
+        config.set(path + ".spawn", spawn.toString());
     }
 }

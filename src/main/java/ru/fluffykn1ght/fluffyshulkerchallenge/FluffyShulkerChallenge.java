@@ -109,4 +109,12 @@ public final class FluffyShulkerChallenge extends JavaPlugin {
         getLogger().info("Данные (пере)загружены!");
         return true;
     }
+
+    public void saveData() {
+        try {
+            data.save(dataFile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
