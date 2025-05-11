@@ -26,12 +26,15 @@ public class ChallengeShulker {
         shulker.name = config.getString("name");
         shulker.blockType = Material.valueOf(config.getString("blockType"));
         shulker.spawn = ShulkerSpawn.fromString(config.getString("spawn"));
-        for (String uuidString : config.getConfigurationSection("mobs").getKeys(false)) {
-            shulker.mobs.add(ShulkerMob.fromConfig(config.getRoot().getConfigurationSection("mobs." + uuidString)));
+        ConfigurationSection shulkerMobs = config.getConfigurationSection("mobs");
+        if (shulkerMobs != null) {
+            for (String uuidString : shulkerMobs.getKeys(false)) {
+                shulker.mobs.add(ShulkerMob.fromConfig(config.getRoot().getConfigurationSection("mobs." + uuidString)));
+            }
         }
-        Set<String> itemKeys = config.getConfigurationSection("items").getKeys(false);
-        if (itemKeys != null) {
-            for (String uuidString : itemKeys) {
+        ConfigurationSection shulkerItems = config.getConfigurationSection("items");
+        if (shulkerItems != null) {
+            for (String uuidString : shulkerMobs.getKeys(false)) {
                 shulker.items.add(ShulkerDropItem.fromConfig(config.getConfigurationSection("items." + uuidString)));
             }
         }
