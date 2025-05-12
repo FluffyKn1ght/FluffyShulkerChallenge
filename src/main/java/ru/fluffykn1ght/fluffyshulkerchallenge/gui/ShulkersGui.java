@@ -3,9 +3,11 @@ package ru.fluffykn1ght.fluffyshulkerchallenge.gui;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 import ru.fluffykn1ght.fluffyshulkerchallenge.ChallengeShulker;
 import ru.fluffykn1ght.fluffyshulkerchallenge.FluffyShulkerChallenge;
-import ru.fluffykn1ght.fluffyshulkerchallenge.UserInterfaces;
+import ru.fluffykn1ght.fluffyshulkerchallenge.gui.shulkereditor.MainPage;
+import ru.fluffykn1ght.pluginutils.GuiHandler;
 import ru.fluffykn1ght.pluginutils.*;
 
 import java.util.HashMap;
@@ -18,27 +20,25 @@ public class ShulkersGui {
                         Material.SPECTRAL_ARROW,
                         1,
                         InternalPluginLanguage.get("gui-back"),
-                        null,
-                        () -> {}
+                        null
                 )
-                        .leftClick(() -> UserInterfaces.openMainGui(player))
+                        .leftClick((guiItem) -> GuiHandler.openGui(MainGui.get(player), player))
         );
         items.put(40, new GuiItem(
                         Material.ANVIL,
                         1,
                         InternalPluginLanguage.get("gui-shulkers-new-name"),
-                        InternalPluginLanguage.getLore("gui-shulkers-new-lore"),
-                        () -> {}
+                        InternalPluginLanguage.getLore("gui-shulkers-new-lore")
                 )
-                        .leftClick(() -> ChatInputHandler.askForChatInput(
+                        .leftClick((guiItem) -> ChatInputHandler.askForChatInput(
                                 (AsyncChatEvent event) -> {
                                     ChallengeShulker shulker = plugin.challengeShulkerHandler.createShulker(
                                             player,
                                             ChatInputHandler.getContent(event.originalMessage())
                                     );
-                                    UserInterfaces.openShulkerEditorGui(player, shulker);
+                                    GuiHandler.openGui(MainPage.get(player, shulker, plugin), player);
                                 },
-                                () -> UserInterfaces.openShulkerGui(player),
+                                () -> GuiHandler.openGui(MainGui.get(player), player),
                                 player,
                                 true,
                                 "Введите имя для нового шалкера:",
@@ -84,9 +84,8 @@ public class ShulkersGui {
                                     null,
                                     null
                             }
-                    ),
-                    () -> {})
-                    .rightClick(() -> UserInterfaces.openShulkerEditorGui(player, shulker))
+                    ))
+                    .rightClick((guiItem) -> GuiHandler.openGui(MainPage.get(player, shulker, plugin), player))
             );
 
             i++;

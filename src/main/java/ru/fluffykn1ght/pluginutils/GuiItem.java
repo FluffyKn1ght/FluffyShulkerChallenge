@@ -5,25 +5,29 @@ import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Material;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryAction;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public class GuiItem {
     public ItemStack stack;
 
-    private final Runnable leftClick;
-    private final Runnable rightClick;
-    private final Runnable shiftLeftClick;
-    private final Runnable shiftRightClick;
-    private final Runnable middleClick;
-    private final Runnable drop;
+    private final Consumer<GuiItem> leftClick;
+    private final Consumer<GuiItem> rightClick;
+    private final Consumer<GuiItem> shiftLeftClick;
+    private final Consumer<GuiItem> shiftRightClick;
+    private final Consumer<GuiItem> middleClick;
+    private final Consumer<GuiItem> drop;
 
-    public final Runnable update;
+    public final Consumer<GuiItem> update;
 
-    public GuiItem(Material material, int amount, @Nullable Component name, @Nullable List<Component> lore, @Nullable Runnable update) {
+    public GuiInventory gui;
+
+    public GuiItem(Material material, int amount, @Nullable Component name, @Nullable List<Component> lore) {
         this.stack = new ItemStack(material, amount);
         if (name != null) {
             ItemMeta meta = this.stack.getItemMeta();
@@ -34,21 +38,16 @@ public class GuiItem {
         if (lore != null) {
             this.stack.lore(lore);
         }
-        this.leftClick = () -> {};
-        this.rightClick = () -> {};
-        this.shiftLeftClick = () -> {};
-        this.shiftRightClick = () -> {};
-        this.middleClick = () -> {};
-        this.drop = () -> {};
-        if (update == null) {
-            this.update = () -> {};
-        }
-        else {
-            this.update = update;
-        }
+        this.leftClick = (guiItem) -> {};
+        this.rightClick = (guiItem) -> {};
+        this.shiftLeftClick = (guiItem) -> {};
+        this.shiftRightClick = (guiItem) -> {};
+        this.middleClick = (guiItem) -> {};
+        this.drop = (guiItem) -> {};
+        this.update = (item) -> {};
     }
 
-    public GuiItem(ItemStack stack, @Nullable Runnable update, @Nullable Runnable leftClick, @Nullable Runnable rightClick, @Nullable Runnable shiftLeftClick, @Nullable Runnable shiftRightClick, @Nullable Runnable middleClick, @Nullable Runnable drop) {
+    public GuiItem(ItemStack stack, @Nullable Consumer<GuiItem> update, @Nullable Consumer<GuiItem> leftClick, @Nullable Consumer<GuiItem> rightClick, @Nullable Consumer<GuiItem> shiftLeftClick, @Nullable Consumer<GuiItem> shiftRightClick, @Nullable Consumer<GuiItem> middleClick, @Nullable Consumer<GuiItem> drop, GuiInventory gui) {
         this.stack = stack;
         this.leftClick = leftClick;
         this.rightClick = rightClick;
@@ -56,15 +55,11 @@ public class GuiItem {
         this.shiftRightClick = shiftRightClick;
         this.middleClick = middleClick;
         this.drop = drop;
-        if (update == null) {
-            this.update = () -> {};
-        }
-        else {
-            this.update = update;
-        }
+        this.update = update;
+        this.gui = gui;
     }
 
-    public GuiItem leftClick(Runnable run) {
+    public GuiItem leftClick(Consumer<GuiItem> run) {
         return new GuiItem(stack,
                 this.update,
                 run,
@@ -72,11 +67,12 @@ public class GuiItem {
                 this.shiftLeftClick,
                 this.shiftRightClick,
                 this.middleClick,
-                this.drop
+                this.drop,
+                this.gui
         );
     }
 
-    public GuiItem rightClick(Runnable run) {
+    public GuiItem rightClick(Consumer<GuiItem> run) {
         return new GuiItem(stack,
                 this.update,
                 this.leftClick,
@@ -84,11 +80,12 @@ public class GuiItem {
                 this.shiftLeftClick,
                 this.shiftRightClick,
                 this.middleClick,
-                this.drop
+                this.drop,
+                this.gui
         );
     }
 
-    public GuiItem shiftLeftClick(Runnable run) {
+    public GuiItem shiftLeftClick(Consumer<GuiItem> run) {
         return new GuiItem(stack,
                 this.update,
                 this.leftClick,
@@ -96,11 +93,12 @@ public class GuiItem {
                 run,
                 this.shiftRightClick,
                 this.middleClick,
-                this.drop
+                this.drop,
+                this.gui
         );
     }
 
-    public GuiItem shiftRightClick(Runnable run) {
+    public GuiItem shiftRightClick(Consumer<GuiItem> run) {
         return new GuiItem(stack,
                 this.update,
                 this.leftClick,
@@ -108,11 +106,12 @@ public class GuiItem {
                 this.shiftLeftClick,
                 run,
                 this.middleClick,
-                this.drop
+                this.drop,
+                this.gui
         );
     }
 
-    public GuiItem middleClick(Runnable run) {
+    public GuiItem middleClick(Consumer<GuiItem> run) {
         return new GuiItem(stack,
                 this.update,
                 this.middleClick,
@@ -120,11 +119,12 @@ public class GuiItem {
                 this.shiftLeftClick,
                 this.shiftRightClick,
                 run,
-                this.drop
+                this.drop,
+                this.gui
         );
     }
 
-    public GuiItem drop(Runnable run) {
+    public GuiItem drop(Consumer<GuiItem> run) {
         return new GuiItem(stack,
                 this.update,
                 this.leftClick,
@@ -132,18 +132,38 @@ public class GuiItem {
                 this.shiftLeftClick,
                 this.shiftRightClick,
                 this.middleClick,
-                run
+                run,
+                this.gui
+        );
+    }
+
+    public GuiItem update(Consumer<GuiItem> run) {
+        return new GuiItem(stack,
+                run,
+                this.leftClick,
+                this.rightClick,
+                this.shiftLeftClick,
+                this.shiftRightClick,
+                this.middleClick,
+                this.drop,
+                this.gui
         );
     }
 
     public void handleClick(ClickType click) {
         switch (click) {
-            case LEFT -> leftClick.run();
-            case RIGHT -> rightClick.run();
-            case SHIFT_LEFT -> shiftLeftClick.run();
-            case SHIFT_RIGHT -> shiftRightClick.run();
-            case MIDDLE -> middleClick.run();
-            case DROP -> drop.run();
+            case LEFT -> leftClick.accept(this);
+            case RIGHT -> rightClick.accept(this);
+            case SHIFT_LEFT -> shiftLeftClick.accept(this);
+            case SHIFT_RIGHT -> shiftRightClick.accept(this);
+            case MIDDLE -> middleClick.accept(this);
+            case DROP -> drop.accept(this);
         }
+    }
+
+    public void setStack(ItemStack stack) {
+        ItemMeta oldMeta = this.stack.getItemMeta();
+        this.stack = stack;
+        this.stack.setItemMeta(oldMeta);
     }
 }

@@ -41,10 +41,9 @@ public class ItemStackPicker implements Listener {
                 Material.BARRIER,
                 1,
                 PluginLanguage.get("gui-back"),
-                new ArrayList<>(),
-                () -> {}
+                new ArrayList<>()
             )
-                .leftClick(() -> {
+                .leftClick((guiItem) -> {
                     cancel.run();
                     itemStackPicker.destroy();
                 })

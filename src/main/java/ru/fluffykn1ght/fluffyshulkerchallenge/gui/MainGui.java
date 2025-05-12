@@ -2,11 +2,12 @@ package ru.fluffykn1ght.fluffyshulkerchallenge.gui;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import ru.fluffykn1ght.fluffyshulkerchallenge.UserInterfaces;
+import ru.fluffykn1ght.fluffyshulkerchallenge.FluffyShulkerChallenge;
+import ru.fluffykn1ght.fluffyshulkerchallenge.gui.shulkereditor.MainPage;
+import ru.fluffykn1ght.pluginutils.GuiHandler;
 import ru.fluffykn1ght.pluginutils.GuiInventory;
 import ru.fluffykn1ght.pluginutils.GuiItem;
 import ru.fluffykn1ght.pluginutils.InternalPluginLanguage;
-import ru.fluffykn1ght.pluginutils.PluginLanguage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,25 +19,22 @@ public class MainGui {
                         Material.SHULKER_BOX,
                         1,
                         InternalPluginLanguage.get("gui-main-shulkers-name"),
-                        InternalPluginLanguage.getLore("gui-main-shulkers-lore"),
-                        () -> {}
+                        InternalPluginLanguage.getLore("gui-main-shulkers-lore")
                 )
-                        .leftClick(() -> UserInterfaces.openShulkerGui(player))
+                        .leftClick((guiItem) -> GuiHandler.openGui(ShulkersGui.get(player, (FluffyShulkerChallenge) GuiHandler.plugin), player))
         );
         items.put(13, new GuiItem(
                         Material.SKELETON_SKULL,
                         1,
                         InternalPluginLanguage.get("gui-main-mobs-name"),
-                        InternalPluginLanguage.getLore("gui-main-mobs-lore"),
-                        () -> {}
+                        InternalPluginLanguage.getLore("gui-main-mobs-lore")
                 )
         );
         items.put(16, new GuiItem(
                         Material.BEACON,
                         1,
                         InternalPluginLanguage.get("gui-main-active-name"),
-                        InternalPluginLanguage.getLore("gui-main-active-lore"),
-                        () -> {}
+                        InternalPluginLanguage.getLore("gui-main-active-lore")
                 )
         );
 

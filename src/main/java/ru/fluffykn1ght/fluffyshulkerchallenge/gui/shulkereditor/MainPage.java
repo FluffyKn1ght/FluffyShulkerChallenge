@@ -1,53 +1,29 @@
-package ru.fluffykn1ght.fluffyshulkerchallenge.gui;
+package ru.fluffykn1ght.fluffyshulkerchallenge.gui.shulkereditor;
 
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.java.JavaPlugin;
 import ru.fluffykn1ght.fluffyshulkerchallenge.ChallengeShulker;
 import ru.fluffykn1ght.fluffyshulkerchallenge.FluffyShulkerChallenge;
-import ru.fluffykn1ght.fluffyshulkerchallenge.UserInterfaces;
+import ru.fluffykn1ght.fluffyshulkerchallenge.gui.MainGui;
+import ru.fluffykn1ght.fluffyshulkerchallenge.gui.ShulkersGui;
+import ru.fluffykn1ght.pluginutils.GuiHandler;
 import ru.fluffykn1ght.pluginutils.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
-enum ShulkerEditorPage {
-    MAIN,
-    BLOCKTYPE,
-    MOBS,
-    ITEMS,
-    CHALLENGE
-}
-
-public class ShulkerEditorGui {
-    public static GuiInventory get(Player player, ChallengeShulker shulker, FluffyShulkerChallenge plugin) {
-        return get(player, shulker, ShulkerEditorPage.MAIN, plugin);
-    }
-
-    public static GuiInventory get(Player player, ChallengeShulker shulker, ShulkerEditorPage page, FluffyShulkerChallenge plugin) {
-        switch (page) {
-            case MAIN -> {
-                return MainPage.get(player, shulker, plugin);
-            }
-        }
-        return get(player, shulker, ShulkerEditorPage.MAIN, plugin);
-    }
-}
-
-class MainPage {
+public class MainPage {
     public static GuiInventory get(Player player, ChallengeShulker shulker, FluffyShulkerChallenge plugin) {
         Map<Integer, GuiItem> items = new HashMap<>();
         items.put(27, new GuiItem(
                         Material.SPECTRAL_ARROW,
                         1,
                         InternalPluginLanguage.get("gui-back"),
-                        null,
-                        () -> {
-                        }
+                        null
                 )
-                        .leftClick(() -> UserInterfaces.openShulkerGui(player))
+                        .leftClick((guiItem) -> GuiHandler.openGui(ShulkersGui.get(player, plugin), player))
         );
         items.put(10, new GuiItem(
                 shulker.blockType,
@@ -83,18 +59,16 @@ class MainPage {
                                 null,
                                 null
                         }
-                ),
-                () -> {})
+                ))
         );
 
         items.put(12, new GuiItem(
                 Material.PURPLE_GLAZED_TERRACOTTA,
                 1,
                 InternalPluginLanguage.get("gui-shulkereditor-main-blocktype-name"),
-                InternalPluginLanguage.getLore("gui-shulkereditor-main-blocktype-lore"),
-                () -> {}
+                InternalPluginLanguage.getLore("gui-shulkereditor-main-blocktype-lore")
             )
-                .leftClick(() -> ItemStackPicker.askForItem(
+                .leftClick((guiItem) -> ItemStackPicker.askForItem(
                         (ItemStack stack) -> {
                             if (!stack.getType().isSolid()) {
                                 player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 0.5F);
@@ -103,9 +77,9 @@ class MainPage {
                                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 2);
                                 shulker.blockType = stack.getType();
                             }
-                            UserInterfaces.openShulkerEditorGui(player, shulker);
+                            GuiHandler.openGui(MainPage.get(player, shulker, plugin), player);
                         },
-                        () -> UserInterfaces.openShulkerEditorGui(player, shulker),
+                        () -> GuiHandler.openGui(MainPage.get(player, shulker, plugin), player),
                         player, plugin
                 ))
         );
@@ -114,30 +88,28 @@ class MainPage {
                 Material.RED_STAINED_GLASS_PANE,
                 1,
                 InternalPluginLanguage.get("gui-shulkereditor-main-spawn-name"),
-                InternalPluginLanguage.getLore("gui-shulkereditor-main-spawn-lore"),
-                () -> {}
+                InternalPluginLanguage.getLore("gui-shulkereditor-main-spawn-lore")
         ));
         items.put(14, new GuiItem(
                 Material.CREEPER_HEAD,
                 1,
                 InternalPluginLanguage.get("gui-shulkereditor-main-mobs-name"),
-                InternalPluginLanguage.getLore("gui-shulkereditor-main-mobs-lore"),
-                () -> {}
+                InternalPluginLanguage.getLore("gui-shulkereditor-main-mobs-lore")
         ));
         items.put(15, new GuiItem(
                 Material.CHEST,
                 1,
                 InternalPluginLanguage.get("gui-shulkereditor-main-items-name"),
-                InternalPluginLanguage.getLore("gui-shulkereditor-main-items-lore"),
-                () -> {}
+                InternalPluginLanguage.getLore("gui-shulkereditor-main-items-lore")
         ));
         items.put(16, new GuiItem(
                 Material.COMMAND_BLOCK_MINECART,
                 1,
                 InternalPluginLanguage.get("gui-shulkereditor-main-challenge-name"),
-                InternalPluginLanguage.getLore("gui-shulkereditor-main-challenge-lore"),
-                () -> {}
-        ));
+                InternalPluginLanguage.getLore("gui-shulkereditor-main-challenge-lore")
+            )
+                .leftClick((guiItem) -> GuiHandler.openGui(ChallengePage.get(player, shulker, plugin), player))
+        );
 
         GuiInventory gui = new GuiInventory(InternalPluginLanguage.getAndFormat("gui-shulkereditor-main-title", new String[]{shulker.name}), 4, items, player);
         gui.fillEmptySlots(0, Material.GRAY_STAINED_GLASS_PANE);
@@ -147,3 +119,5 @@ class MainPage {
         return gui;
     }
 }
+
+

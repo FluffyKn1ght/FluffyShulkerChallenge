@@ -30,28 +30,23 @@ public class GuiInventory implements Listener {
     }
 
     public void changeItems() {
-        gui.clear();
+        //gui.clear();
         for (int itemIndex : this.items.keySet()) {
             GuiItem guiItem = this.items.get(itemIndex);
+            guiItem.gui = this;
             gui.setItem(itemIndex, guiItem.stack);
-            guiItem.update.run();
+            guiItem.update.accept(guiItem);
         }
     }
 
     public void changeItems(Map<Integer, GuiItem> newItems) {
         items = newItems;
-        gui.clear();
+        //gui.clear();
         for (int itemIndex : this.items.keySet()) {
             GuiItem guiItem = this.items.get(itemIndex);
+            guiItem.gui = this;
             gui.setItem(itemIndex, guiItem.stack);
-            guiItem.update.run();
-        }
-    }
-
-    public void update() {
-        for (int itemIndex : this.items.keySet()) {
-            GuiItem guiItem = this.items.get(itemIndex);
-            guiItem.update.run();
+            guiItem.update.accept(guiItem);
         }
     }
 
@@ -81,6 +76,7 @@ public class GuiInventory implements Listener {
             item.handleClick(event.getClick());
         }
     }
+
 
     @EventHandler
     public void onInventoryDrag(InventoryDragEvent event) {

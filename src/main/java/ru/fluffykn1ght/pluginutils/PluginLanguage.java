@@ -16,12 +16,12 @@ public class PluginLanguage {
     }
 
     public static Component get(String name) {
-        Component component = MiniMessage.miniMessage().deserialize(lang.getString(name));
+        Component component = MiniMessage.miniMessage().deserialize(lang.getString(name, "[Unknown string: " + name + "]"));
         return component.decoration(TextDecoration.ITALIC, false);
     }
 
     public static Component get(String name, boolean keepItalics) {
-        Component component = MiniMessage.miniMessage().deserialize(lang.getString(name));
+        Component component = MiniMessage.miniMessage().deserialize(lang.getString(name, "[Unknown string: " + name + "]"));
         if (keepItalics) {
             return component;
         }
@@ -29,12 +29,12 @@ public class PluginLanguage {
     }
 
     public static Component getAndFormat(String name, String[] format) {
-        Component component = MiniMessage.miniMessage().deserialize(lang.getString(name).formatted(format));
+        Component component = MiniMessage.miniMessage().deserialize(lang.getString(name, "[Unknown string: " + name + "]").formatted(format));
         return component.decoration(TextDecoration.ITALIC, false);
     }
 
     public static Component getAndFormat(String name, String[] format, boolean keepItalics) {
-        Component component = MiniMessage.miniMessage().deserialize(lang.getString(name).formatted(format));
+        Component component = MiniMessage.miniMessage().deserialize(lang.getString(name, "[Unknown string: " + name + "]").formatted(format));
         if (keepItalics) {
             return component;
         }
@@ -62,5 +62,9 @@ public class PluginLanguage {
             i++;
         }
         return out;
+    }
+
+    public static String getRaw(String name) {
+        return lang.getString(name, "[Unknown string: " + name + "]");
     }
 }

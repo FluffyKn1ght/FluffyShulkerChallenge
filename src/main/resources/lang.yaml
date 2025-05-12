@@ -1,8 +1,14 @@
+enabled: "Включено"
+disabled: "Выключено"
+
 chatinput-main: "\n<gold>Пожалуйста, введите нужный текст в чат.</gold>\n%1$s\n"
 chatinput-cancel: "<gray>Нажмите ЛКМ для отмены ввода текста.</gray>\n"
 chatinput-title: "<gold>Введите текст в чат</gold>"
 
 iteminput-title: "<b>Выберите предмет</b>"
+
+shulker-mode-normal: "Обычный режим"
+shulker-mode-survival: "Режим выживания"
 
 gui-back: "<gold><b>Назад</b></gold>"
 gui-nextpage: "<gold><b>След. страница</b></gold>"
@@ -68,3 +74,9 @@ gui-shulkereditor-main-items-lore:
 gui-shulkereditor-main-challenge-name: "<color:#AE7CFF><b>Испытание</b></color>"
 gui-shulkereditor-main-challenge-lore:
   - "<gray>Изменение поведения испытания шалкера</gray>"
+
+gui-shulkereditor-challenge-title: "<b>Испытание - %1$s</b>"
+gui-shulkereditor-challenge-survival-name: "<color:#AE7CFF><b>Режим Испытания</b></color>"
+gui-shulkereditor-challenge-survival-lore:
+  - ""
+  - "%1$s"
