@@ -6,10 +6,7 @@ import org.bukkit.entity.Player;
 import ru.fluffykn1ght.fluffyshulkerchallenge.ChallengeShulker;
 import ru.fluffykn1ght.fluffyshulkerchallenge.FluffyShulkerChallenge;
 import ru.fluffykn1ght.fluffyshulkerchallenge.UserInterfaces;
-import ru.fluffykn1ght.pluginutils.ChatInputHandler;
-import ru.fluffykn1ght.pluginutils.GuiInventory;
-import ru.fluffykn1ght.pluginutils.GuiItem;
-import ru.fluffykn1ght.pluginutils.PluginLanguage;
+import ru.fluffykn1ght.pluginutils.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +17,7 @@ public class ShulkersGui {
         items.put(36, new GuiItem(
                         Material.SPECTRAL_ARROW,
                         1,
-                        PluginLanguage.get("gui-back"),
+                        InternalPluginLanguage.get("gui-back"),
                         null,
                         () -> {}
                 )
@@ -29,8 +26,8 @@ public class ShulkersGui {
         items.put(40, new GuiItem(
                         Material.ANVIL,
                         1,
-                        PluginLanguage.get("gui-shulkers-new-name"),
-                        PluginLanguage.getLore("gui-shulkers-new-lore"),
+                        InternalPluginLanguage.get("gui-shulkers-new-name"),
+                        InternalPluginLanguage.getLore("gui-shulkers-new-lore"),
                         () -> {}
                 )
                         .leftClick(() -> ChatInputHandler.askForChatInput(
@@ -54,11 +51,11 @@ public class ShulkersGui {
             items.put(i, new GuiItem(
                     shulker.blockType,
                     1,
-                    PluginLanguage.getAndFormat(
+                    InternalPluginLanguage.getAndFormat(
                             "gui-shulkers-shulker-name",
                             new String[]{shulker.name}
                     ),
-                    PluginLanguage.getAndFormatLore("gui-shulkers-shulker-lore",
+                    InternalPluginLanguage.getAndFormatLore("gui-shulkers-shulker-lore",
                             new String[][]{
                                     new String[]{
                                             shulker.uuid.toString()
@@ -95,7 +92,7 @@ public class ShulkersGui {
             i++;
         }
 
-        GuiInventory gui = new GuiInventory(PluginLanguage.get("gui-shulkers-title"), 5, items, player);
+        GuiInventory gui = new GuiInventory(InternalPluginLanguage.get("gui-shulkers-title"), 5, items, player);
         gui.fillEmptySlots(0, Material.GRAY_STAINED_GLASS_PANE);
         gui.fillEmptySlots(1, Material.GRAY_STAINED_GLASS_PANE);
         gui.fillEmptySlots(2, Material.GRAY_STAINED_GLASS_PANE);

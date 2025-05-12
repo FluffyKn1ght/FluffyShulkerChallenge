@@ -5,6 +5,7 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import ru.fluffykn1ght.pluginutils.ConfigurationUpgrader;
+import ru.fluffykn1ght.pluginutils.InternalPluginLanguage;
 import ru.fluffykn1ght.pluginutils.PluginLanguage;
 
 import java.io.File;
@@ -32,6 +33,7 @@ public final class FluffyShulkerChallenge extends JavaPlugin {
         if (!reload()) { return; }
 
         PluginLanguage.setLang(lang);
+        InternalPluginLanguage.init(this);
         UserInterfaces.setPlugin(this);
 
         commandHandler = new CommandHandler();

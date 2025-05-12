@@ -8,10 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import ru.fluffykn1ght.fluffyshulkerchallenge.ChallengeShulker;
 import ru.fluffykn1ght.fluffyshulkerchallenge.FluffyShulkerChallenge;
 import ru.fluffykn1ght.fluffyshulkerchallenge.UserInterfaces;
-import ru.fluffykn1ght.pluginutils.GuiInventory;
-import ru.fluffykn1ght.pluginutils.GuiItem;
-import ru.fluffykn1ght.pluginutils.ItemStackPicker;
-import ru.fluffykn1ght.pluginutils.PluginLanguage;
+import ru.fluffykn1ght.pluginutils.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,7 +42,7 @@ class MainPage {
         items.put(27, new GuiItem(
                         Material.SPECTRAL_ARROW,
                         1,
-                        PluginLanguage.get("gui-back"),
+                        InternalPluginLanguage.get("gui-back"),
                         null,
                         () -> {
                         }
@@ -55,11 +52,11 @@ class MainPage {
         items.put(10, new GuiItem(
                 shulker.blockType,
                 1,
-                PluginLanguage.getAndFormat(
+                InternalPluginLanguage.getAndFormat(
                         "gui-shulkers-shulker-name",
                         new String[]{shulker.name}
                 ),
-                PluginLanguage.getAndFormatLore("gui-shulkereditor-shulker-lore",
+                InternalPluginLanguage.getAndFormatLore("gui-shulkereditor-shulker-lore",
                         new String[][]{
                                 new String[]{
                                         shulker.uuid.toString()
@@ -93,8 +90,8 @@ class MainPage {
         items.put(12, new GuiItem(
                 Material.PURPLE_GLAZED_TERRACOTTA,
                 1,
-                PluginLanguage.get("gui-shulkereditor-main-blocktype-name"),
-                PluginLanguage.getLore("gui-shulkereditor-main-blocktype-lore"),
+                InternalPluginLanguage.get("gui-shulkereditor-main-blocktype-name"),
+                InternalPluginLanguage.getLore("gui-shulkereditor-main-blocktype-lore"),
                 () -> {}
             )
                 .leftClick(() -> ItemStackPicker.askForItem(
@@ -116,33 +113,33 @@ class MainPage {
                 //Material.FOX_SPAWN_EGG,
                 Material.RED_STAINED_GLASS_PANE,
                 1,
-                PluginLanguage.get("gui-shulkereditor-main-spawn-name"),
-                PluginLanguage.getLore("gui-shulkereditor-main-spawn-lore"),
+                InternalPluginLanguage.get("gui-shulkereditor-main-spawn-name"),
+                InternalPluginLanguage.getLore("gui-shulkereditor-main-spawn-lore"),
                 () -> {}
         ));
         items.put(14, new GuiItem(
                 Material.CREEPER_HEAD,
                 1,
-                PluginLanguage.get("gui-shulkereditor-main-mobs-name"),
-                PluginLanguage.getLore("gui-shulkereditor-main-mobs-lore"),
+                InternalPluginLanguage.get("gui-shulkereditor-main-mobs-name"),
+                InternalPluginLanguage.getLore("gui-shulkereditor-main-mobs-lore"),
                 () -> {}
         ));
         items.put(15, new GuiItem(
                 Material.CHEST,
                 1,
-                PluginLanguage.get("gui-shulkereditor-main-items-name"),
-                PluginLanguage.getLore("gui-shulkereditor-main-items-lore"),
+                InternalPluginLanguage.get("gui-shulkereditor-main-items-name"),
+                InternalPluginLanguage.getLore("gui-shulkereditor-main-items-lore"),
                 () -> {}
         ));
         items.put(16, new GuiItem(
                 Material.COMMAND_BLOCK_MINECART,
                 1,
-                PluginLanguage.get("gui-shulkereditor-main-challenge-name"),
-                PluginLanguage.getLore("gui-shulkereditor-main-challenge-lore"),
+                InternalPluginLanguage.get("gui-shulkereditor-main-challenge-name"),
+                InternalPluginLanguage.getLore("gui-shulkereditor-main-challenge-lore"),
                 () -> {}
         ));
 
-        GuiInventory gui = new GuiInventory(PluginLanguage.getAndFormat("gui-shulkereditor-main-title", new String[]{shulker.name}), 4, items, player);
+        GuiInventory gui = new GuiInventory(InternalPluginLanguage.getAndFormat("gui-shulkereditor-main-title", new String[]{shulker.name}), 4, items, player);
         gui.fillEmptySlots(0, Material.GRAY_STAINED_GLASS_PANE);
         gui.fillEmptySlots(1, Material.GRAY_STAINED_GLASS_PANE);
         gui.fillEmptySlots(2, Material.GRAY_STAINED_GLASS_PANE);
