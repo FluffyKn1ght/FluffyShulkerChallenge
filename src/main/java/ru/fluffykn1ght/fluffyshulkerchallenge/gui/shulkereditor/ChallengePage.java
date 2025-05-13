@@ -1,5 +1,6 @@
 package ru.fluffykn1ght.fluffyshulkerchallenge.gui.shulkereditor;
 
+import net.kyori.adventure.text.Component;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -11,6 +12,7 @@ import ru.fluffykn1ght.pluginutils.GuiHandler;
 import ru.fluffykn1ght.pluginutils.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ChallengePage {
@@ -78,6 +80,90 @@ public class ChallengePage {
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 2);
                     guiItem.gui.update();
                 })
+        );
+
+        List<Component> timeLore;
+        if (shulker.survive) {
+            timeLore = InternalPluginLanguage.getAndFormatLore(
+                    "gui-shulkereditor-challenge-time-lore-survival",
+                    new String[][]{
+                            new String[]{String.valueOf(shulker.time)},
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                    }
+            );
+        }
+        else {
+            timeLore = InternalPluginLanguage.getAndFormatLore(
+                    "gui-shulkereditor-challenge-time-lore-normal",
+                    new String[][]{
+                            new String[]{String.valueOf(shulker.time)},
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                    }
+            );
+        }
+
+
+
+        items.put(12, new GuiItem(
+                Material.CLOCK,
+                1,
+                InternalPluginLanguage.get("gui-shulkereditor-challenge-time-name"),
+                timeLore
+            )
+                .update((guiItem) -> {
+                    List<Component> newLore;
+                    if (shulker.survive) {
+                        newLore = InternalPluginLanguage.getAndFormatLore(
+                                "gui-shulkereditor-challenge-time-lore-survival",
+                                new String[][]{
+                                        new String[]{String.valueOf(shulker.time)},
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null
+                                }
+                        );
+                    } else {
+                        newLore = InternalPluginLanguage.getAndFormatLore(
+                                "gui-shulkereditor-challenge-time-lore-normal",
+                                new String[][]{
+                                        new String[]{String.valueOf(shulker.time)},
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null,
+                                        null
+                                }
+                        );
+                    }
+                    guiItem.stack.lore(newLore);
+                }
+            )
         );
 
         GuiInventory gui = new GuiInventory(InternalPluginLanguage.getAndFormat("gui-shulkereditor-challenge-title", new String[]{shulker.name}), 4, items, player);
