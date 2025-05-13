@@ -26,27 +26,27 @@ public class GuiInventory implements Listener {
     public GuiInventory(Component title, int rows, Map<Integer, GuiItem> items, Player player) {
         this.gui = Bukkit.getServer().createInventory(null, rows * 9, title);
         this.player = player;
-        this.changeItems(items);
+        this.update(items);
     }
 
-    public void changeItems() {
+    public void update() {
         //gui.clear();
         for (int itemIndex : this.items.keySet()) {
             GuiItem guiItem = this.items.get(itemIndex);
             guiItem.gui = this;
-            gui.setItem(itemIndex, guiItem.stack);
             guiItem.update.accept(guiItem);
+            gui.setItem(itemIndex, guiItem.stack);
         }
     }
 
-    public void changeItems(Map<Integer, GuiItem> newItems) {
+    public void update(Map<Integer, GuiItem> newItems) {
         items = newItems;
         //gui.clear();
         for (int itemIndex : this.items.keySet()) {
             GuiItem guiItem = this.items.get(itemIndex);
             guiItem.gui = this;
-            gui.setItem(itemIndex, guiItem.stack);
             guiItem.update.accept(guiItem);
+            gui.setItem(itemIndex, guiItem.stack);
         }
     }
 

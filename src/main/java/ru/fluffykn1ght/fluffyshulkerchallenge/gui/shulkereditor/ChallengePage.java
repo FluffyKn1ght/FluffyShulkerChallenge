@@ -24,14 +24,24 @@ public class ChallengePage {
                 )
                         .leftClick((guiItem) -> GuiHandler.openGui(MainGui.get(player), player))
         );
+        Material challenge;
+        if (shulker.survive) {
+            challenge = Material.LIME_DYE;
+        }
+        else {
+            challenge = Material.GRAY_DYE;
+        }
 
         items.put(11, new GuiItem(
-                Material.BLACK_STAINED_GLASS_PANE,
+                challenge,
                 1,
                 InternalPluginLanguage.get("gui-shulkereditor-challenge-survival-name"),
                 InternalPluginLanguage.getAndFormatLore("gui-shulkereditor-challenge-survival-lore", new String[][]{
                         null,
-                        new String[] { String.valueOf(shulker.survive) },
+                        new String[] { ValueFancifier.bool(shulker.survive, InternalPluginLanguage.getRaw("shulker-mode-survival"), InternalPluginLanguage.getRaw("shulker-mode-normal")) },
+                        null,
+                        null,
+                        null,
                         null,
                         null,
                         null,
@@ -44,7 +54,7 @@ public class ChallengePage {
                         newStack = new ItemStack(Material.LIME_DYE, 1);
                     }
                     else {
-                        newStack = new ItemStack(Material.LIGHT_GRAY_DYE, 1);
+                        newStack = new ItemStack(Material.GRAY_DYE, 1);
                     }
                     guiItem.setStack(newStack);
                     guiItem.stack.lore(
@@ -54,17 +64,19 @@ public class ChallengePage {
                                     null,
                                     null,
                                     null,
+                                    null,
+                                    null,
+                                    null,
                                     null
                     }));
-
                 }))
 
                 .leftClick((guiItem) -> {
-                    plugin.challengeShulkerHandler.shulkers.remove(shulker);
+                    //plugin.challengeShulkerHandler.shulkers.remove(shulker);
                     shulker.survive = !shulker.survive;
-                    plugin.challengeShulkerHandler.shulkers.add(shulker);
+                    //plugin.challengeShulkerHandler.shulkers.add(shulker);
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 2);
-                    guiItem.gui.changeItems();
+                    guiItem.gui.update();
                 })
         );
 
