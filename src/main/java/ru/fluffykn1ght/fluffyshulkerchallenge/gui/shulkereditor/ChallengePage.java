@@ -76,6 +76,9 @@ public class ChallengePage {
                 .leftClick((guiItem) -> {
                     //plugin.challengeShulkerHandler.shulkers.remove(shulker);
                     shulker.survive = !shulker.survive;
+                    if (shulker.survive && shulker.time <= 0) {
+                        shulker.time = 60;
+                    }
                     //plugin.challengeShulkerHandler.shulkers.add(shulker);
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 2);
                     guiItem.gui.update();
@@ -164,6 +167,44 @@ public class ChallengePage {
                     guiItem.stack.lore(newLore);
                 }
             )
+                .leftClick((guiItem) -> {
+                    shulker.time += 1;
+                    guiItem.gui.update();
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 2);
+                })
+                .rightClick((guiItem) -> {
+                    if ((shulker.survive && shulker.time - 1 == 0) || shulker.time -1 < 0) {
+                        player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 0.5F);
+                        return;
+                    }
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 2);
+                    shulker.time -= 1;
+                    guiItem.gui.update();
+                })
+                .shiftLeftClick((guiItem) -> {
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 2);
+                    shulker.time += 60;
+                    guiItem.gui.update();
+                })
+                .shiftRightClick((guiItem) -> {
+                    if ((shulker.survive && shulker.time - 60 == 0) || shulker.time -1 < 60) {
+                        player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 0.5F);
+                        return;
+                    }
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 2);
+                    shulker.time -= 60;
+                    guiItem.gui.update();
+                })
+                .drop((guiItem) -> {
+                    if (shulker.survive) {
+                        player.playSound(player.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 0.5F);
+                    }
+                    else {
+                        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 2);
+                        shulker.time = 0;
+                        guiItem.gui.update();
+                    }
+                })
         );
 
         GuiInventory gui = new GuiInventory(InternalPluginLanguage.getAndFormat("gui-shulkereditor-challenge-title", new String[]{shulker.name}), 4, items, player);
@@ -171,6 +212,7 @@ public class ChallengePage {
         gui.fillEmptySlots(1, Material.GRAY_STAINED_GLASS_PANE);
         gui.fillEmptySlots(2, Material.GRAY_STAINED_GLASS_PANE);
         gui.fillEmptySlots(3, Material.PURPLE_STAINED_GLASS_PANE);
+        gui.close = () -> shulker.saveToConfig(plugin.data);
         return gui;
     }
 }

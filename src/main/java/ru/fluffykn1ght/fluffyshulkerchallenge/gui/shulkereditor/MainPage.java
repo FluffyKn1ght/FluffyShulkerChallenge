@@ -77,6 +77,7 @@ public class MainPage {
                                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 2);
                                 shulker.blockType = stack.getType();
                             }
+                            guiItem.gui.close = () -> shulker.saveToConfig(plugin.data);
                             GuiHandler.openGui(MainPage.get(player, shulker, plugin), player);
                         },
                         () -> GuiHandler.openGui(MainPage.get(player, shulker, plugin), player),

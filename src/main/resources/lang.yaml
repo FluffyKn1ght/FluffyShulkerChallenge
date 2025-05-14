@@ -92,7 +92,7 @@ gui-shulkereditor-challenge-time-lore-normal:
   - "<gold>Выбрано:</gold> <white>%1$s секунд</white>"
   - ""
   - "<gray>Общее время на завершение испытания.</gray>"
-  - "<gray>Опционально: 0 секунд = до полного завершения.</gray>"
+  - "<gray>Опционально: 0 секунд = до убийства всех мобов.</gray>"
   - ""
   - "<gold><b>ЛКМ</b></gold> <white>+1 секунда</white>"
   - "<gold><b>ПКМ</b></gold> <white>-1 секунда</white>"

@@ -43,6 +43,9 @@ public final class FluffyShulkerChallenge extends JavaPlugin {
         challengeShulkerHandler = new ChallengeShulkerHandler(this);
         challengeShulkerHandler.reloadShulkers();
 
+        // TODO: Сделать сохранение раз в 3 минуты в релизе!!
+        getServer().getScheduler().runTaskTimer(this, this::saveData, 20L * 20L, 20L * 20L);
+
         getLogger().info("Плагин готов к работе!");
     }
 

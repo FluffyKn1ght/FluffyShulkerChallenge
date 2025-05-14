@@ -33,14 +33,14 @@ public class ChatInputHandler implements Listener {
     public static void askForChatInput(Consumer<AsyncChatEvent> callback, Runnable cancel, Player player, boolean cancellable, String details, JavaPlugin plugin) {
         ChatInputHandler chatInputHandler = new ChatInputHandler(callback, cancel, player, cancellable, plugin);
         player.closeInventory();
-        player.sendMessage(PluginLanguage.getAndFormat("chatinput-main", new String[]{ details }));
+        player.sendMessage(InternalPluginLanguage.getAndFormat("chatinput-main", new String[]{ details }));
         if (cancellable) {
-            player.sendMessage(PluginLanguage.get("chatinput-cancel"));
+            player.sendMessage(InternalPluginLanguage.get("chatinput-cancel"));
         }
         player.showTitle(
                 Title.title(
                         Component.text().build(),
-                        PluginLanguage.get("chatinput-title"),
+                        InternalPluginLanguage.get("chatinput-title"),
                         Title.Times.times(
                                 Duration.ofSeconds(1),
                                 Duration.ofSeconds(3600),

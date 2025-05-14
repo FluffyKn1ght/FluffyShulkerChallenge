@@ -40,7 +40,7 @@ public class ItemStackPicker implements Listener {
         items.put(18, new GuiItem(
                 Material.BARRIER,
                 1,
-                PluginLanguage.get("gui-back"),
+                InternalPluginLanguage.get("gui-back"),
                 new ArrayList<>()
             )
                 .leftClick((guiItem) -> {
@@ -50,7 +50,7 @@ public class ItemStackPicker implements Listener {
         );
 
         itemStackPicker.gui = new ForwarderGuiInventory(
-                PluginLanguage.get("iteminput-title"),
+                InternalPluginLanguage.get("iteminput-title"),
                 3,
                 items,
                 player,

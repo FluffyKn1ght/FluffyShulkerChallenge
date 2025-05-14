@@ -19,6 +19,7 @@ public class ChallengeShulker {
     public int maxMoney = 0;
     public int time = 300;
     public boolean survive = false;
+    public int mobWaveSize = 0;
 
     public static ChallengeShulker fromConfig(ConfigurationSection config) {
         ChallengeShulker shulker = new ChallengeShulker();
@@ -42,6 +43,7 @@ public class ChallengeShulker {
         shulker.maxMoney = config.getInt("money.max");
         shulker.time = config.getInt("challenge.time");
         shulker.survive = config.getBoolean("challenge.survive");
+        shulker.time = config.getInt("mobWaveSize");
 
         return shulker;
     }
@@ -65,5 +67,6 @@ public class ChallengeShulker {
         config.set(path + ".challenge.time", time);
         config.set(path + ".challenge.survive", survive);
         config.set(path + ".spawn", spawn.toString());
+        config.set(path + ".mobWaveSize", mobWaveSize);
     }
 }
